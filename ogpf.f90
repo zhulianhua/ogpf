@@ -282,6 +282,7 @@ module ogpf
         procedure, pass, public :: filename     => set_filename
         procedure, pass, public :: reset        => reset_to_defaults
         procedure, pass, public :: preset       => use_preset_configuration
+        procedure, pass, public :: close_plots  => close_all_plots
 
 
         procedure, pass, public :: multiplot  => sub_multiplot
@@ -2151,6 +2152,16 @@ contains
         call execute_command_line ('gnuplot -persist ' // this%txtfilename)  !   Now plot the results
 
     end subroutine finalize_plot
+
+    subroutine close_all_plots(this)
+        !..............................................................................
+        ! To cloase all gnuplots
+        !..............................................................................
+        class(gpf) :: this
+
+        call execute_command_line ('pkill -9 gnuplot ')  !   Now plot the results
+
+    end subroutine close_all_plots
 
 
 
